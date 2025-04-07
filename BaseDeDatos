@@ -1,0 +1,63 @@
+CREATE DATABASE SistemaFrutas;
+GO
+
+USE SistemaFrutas;
+GO
+
+-- Tabla: GestionDelSistema
+CREATE TABLE GestionDelSistema (
+    GestionID INT PRIMARY KEY
+);
+
+-- Tabla: Login
+CREATE TABLE Login (
+    LoginID INT PRIMARY KEY,
+    usernameLabel NVARCHAR(50),
+    usernameInput NVARCHAR(50),
+    passwordLabel NVARCHAR(50),
+    passwordInput NVARCHAR(50),
+    loginButton NVARCHAR(50),
+    GestionID INT FOREIGN KEY REFERENCES GestionDelSistema(GestionID)
+);
+
+-- Tabla: Usuario
+CREATE TABLE Usuario (
+    UsuarioID INT PRIMARY KEY
+);
+
+-- Tabla: Scanner
+CREATE TABLE Scanner (
+    ScannerID INT PRIMARY KEY,
+    UsuarioID INT FOREIGN KEY REFERENCES Usuario(UsuarioID),
+    TipoCamara NVARCHAR(50),
+    Estado NVARCHAR(50)
+);
+
+-- Tabla: Fruta
+CREATE TABLE Fruta (
+    FrutaID INT PRIMARY KEY,
+    Nombre NVARCHAR(100),
+    Imagen NVARCHAR(255),
+    Precio DECIMAL(10, 2),
+    Calorias INT,
+    Carbohidratos DECIMAL(10, 2)
+);
+
+-- Tabla: DeteccionFruta
+CREATE TABLE DeteccionFruta (
+    DeteccionID INT PRIMARY KEY,
+    ScannerID INT FOREIGN KEY REFERENCES Scanner(ScannerID),
+    FrutaDetectada INT FOREIGN KEY REFERENCES Fruta(FrutaID),
+    Fecha DATE,
+    Hora TIME
+);
+
+-- Tabla: Reconocimiento
+CREATE TABLE Reconocimiento (
+    ReconocimientoID INT PRIMARY KEY,
+    DeteccionID INT FOREIGN KEY REFERENCES DeteccionFruta(DeteccionID),
+    btnWebcam NVARCHAR(50),
+    cameraFrame NVARCHAR(255),
+    frutaList NVARCHAR(255),
+    detalleText NVARCHAR(MAX)
+);
