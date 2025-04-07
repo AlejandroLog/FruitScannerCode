@@ -29,3 +29,7 @@ Código del proyecto y base de datos.
 # Piña
 ![Pina](frutas/IMG_8494.JPG)
 
+# Mango
+![IMG_8392](https://github.com/user-attachments/assets/834e46cf-704e-46cb-98ce-bd9561102601)
+
+
